@@ -12,7 +12,8 @@ track_stamps = []
 score = 100
 difficulty = 0
 
-difficulty = input("Choose a difficulty (1-3):")
+difficulty = input("Choose a difficulty (1-3 reccomended):")
+int(difficulty)
 
 turtle.pu()
 turtle.tracer(0,0)
@@ -69,7 +70,7 @@ def scroll_track():
     width = tracks[len(tracks)-1]['width']
 
     step = random.randint(-2, 2)
-    x_pos += step * (difficulty*math.log10(score))
+    x_pos += step * (math.log10(score)*int(difficulty))
 
 
     width_step = random.randint(-1, 1)
