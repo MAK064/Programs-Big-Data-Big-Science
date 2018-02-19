@@ -91,7 +91,7 @@ def draw_player():
 
     font.clear()
     font.ht()
-    font.setpos(-70, 220)
+    font.setpos(-70, -300)
     font.color("Red")
     font.write("Score: " + str(score), font=("Terminal", 16, "normal"))
 
