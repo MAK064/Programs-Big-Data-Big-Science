@@ -12,7 +12,7 @@ track_stamps = []
 score = 100
 difficulty = 0
 
-difficulty = input("Choose a difficulty (1-3 reccomended):")
+difficulty = input("Choose a difficulty (1-3 reccomended) (>5 will be buggy):")
 int(difficulty)
 
 turtle.pu()
