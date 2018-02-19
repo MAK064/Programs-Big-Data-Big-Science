@@ -25,14 +25,14 @@ def reset():
 
     turtle.clearstamp(player_stamp)
     clear_track()
-    
+
     game_over = False
     score = 100
     player_pos = [0, 0]
     player_stamp = -1
     tracks = []
-    track_stamps = []    
-    for i in range(21):    
+    track_stamps = []
+    for i in range(21):
         tracks.append({'position': [0, 200 - i * 20], 'width': 150})
 
 def clear_track():
@@ -60,18 +60,18 @@ def draw_track():
 
 def scroll_track():
     global tracks, score
-    
+
     score += score//100
     tracks.pop(0)
     for track in tracks:
-        track['position'][1] += (25 * difficulty)
+        track['position'][1] += 70
     x_pos = tracks[len(tracks)-1]['position'][0]
     width = tracks[len(tracks)-1]['width']
-    
+
     step = random.randint(-2, 2)
     x_pos += step * (difficulty*math.log10(score))
 
-    
+
     width_step = random.randint(-1, 1)
     width += width_step * 10
     if (width <= 100):
@@ -93,7 +93,7 @@ def draw_player():
     font.setpos(-70, 220)
     font.color("Red")
     font.write("Score: " + str(score), font=("Terminal", 16, "normal"))
-    
+
     turtle.clearstamp(player_stamp)
     turtle.setpos(player_pos)
     turtle.shape('square')
@@ -112,7 +112,7 @@ def run_game():
     global game_over
 
     check_collision()
-    if not game_over:        
+    if not game_over:
         scroll_track()
         clear_track()
         draw_track()
