@@ -94,6 +94,8 @@ def draw_player():
     font.setpos(-70, -300)
     font.color("Red")
     font.write("Score: " + str(score), font=("Terminal", 16, "normal"))
+    font.setpos(-70, -320)
+    font.write("Level: " + str(int(math.log10(score)*int(difficulty))), font=("Terminal", 16, "normal"))
 
     turtle.clearstamp(player_stamp)
     turtle.setpos(player_pos)
