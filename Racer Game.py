@@ -13,7 +13,6 @@ score = 100
 difficulty = 0
 
 difficulty = input("Choose a difficulty (1-3 reccomended) (>5 will be buggy):")
-int(difficulty)
 
 turtle.pu()
 turtle.tracer(0,0)
