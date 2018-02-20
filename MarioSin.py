@@ -15,9 +15,9 @@ def Game():
     #print("hello world")
     global M1y, M1x, M2y, M2x, Time, G
     jmss.drawImage("mario.png" , x = M1x , y = M1y)
-    jmss.drawImage('mario.png' , x = 800, y = M2y)
+    jmss.drawImage('mario.png' , x = M2x, y = M2y)
 
-    M1y -= 6 #Frequency
+    M1y -= 12 #Frequency
     M1x = 200*math.sin(Time/5) + 400 #Make Mario move in Sinusoidal manner
     M2y -= (G*Time) #Non-Linear Movement
     Time += 1

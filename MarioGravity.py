@@ -14,6 +14,7 @@ Time = 0
 def Game():
     #print("hello world")
     global M1y, M1x, M2y, M2x, Time, G
+
     jmss.drawImage("mario.png" , x = M1x , y = M1y)
     jmss.drawImage('mario.png' , x = 800, y = M2y)
 
