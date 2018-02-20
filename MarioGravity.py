@@ -15,10 +15,11 @@ def Game():
     #print("hello world")
     global M1y, M1x, M2y, M2x, Time, G
 
+    jmss.clear(0,0,0,1)
     jmss.drawImage("mario.png" , x = M1x , y = M1y)
-    jmss.drawImage('mario.png' , x = 800, y = M2y)
+    jmss.drawImage('mario.png' , x = M2x , y = M2y)
 
-    M1y -= G #Frequency
+    M1y -= G #Linear Movement
     M2y -= (G*Time) #Non-Linear Movement
     Time += 1
 
