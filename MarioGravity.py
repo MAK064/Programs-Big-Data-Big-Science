@@ -1,8 +1,9 @@
 from JMSSGraphics import *
 import math
 
-width = int(input("Please enter your desired width: "))
-height = int(input("Please enter your desired height: "))
+width = int(input("Please enter your desired width (>450 reccomended): "))
+height = int(input("Please enter your desired height (>300 reccomended): "))
+fps = int(input("Please enter your desired fps (higher = faster simulation) :"))
 jmss = Graphics(width = width, height = height, title = "Test Game", fps = 60)
 M1x = width / 3
 M1y = height - (height/5)
