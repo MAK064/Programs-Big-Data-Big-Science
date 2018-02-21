@@ -13,7 +13,6 @@ Time = 0
 
 @jmss.mainloop
 def Game():
-    #print("hello world")
     global M1y, M1x, M2y, M2x, Time, G
 
     jmss.clear(0,0,0,1)
