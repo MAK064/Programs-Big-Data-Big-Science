@@ -14,12 +14,13 @@ Time = 0
 def Game():
     #print("hello world")
     global M1y, M1x, M2y, M2x, Time, G
+    #jmss.clear(0,0,0,1)
     jmss.drawImage("mario.png" , x = M1x , y = M1y)
     jmss.drawImage('mario.png' , x = M2x, y = M2y)
 
-    M1y -= 12 #Frequency
-    M1x = 200*math.sin(Time/5) + 400 #Make Mario move in Sinusoidal manner
-    M2y -= (G*Time) #Non-Linear Movement
+    M1y = 200*math.sin(Time/2) + 400 #Frequency
+    M1x = 200*math.sin(Time/3) + 400 #Make Mario move in Sinusoidal manner
+    #M2y -= (G*Time) #Non-Linear Movement
     Time += 1
 
 jmss.run()
