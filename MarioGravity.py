@@ -2,7 +2,7 @@ from JMSSGraphics import *
 
 width = 1200 #int(input("Please enter your desired width (>450 reccomended): "))
 height = 800 #int(input("Please enter your desired height (>300 reccomended): "))
-fps = 10 #int(input("Please enter your desired fps (higher = faster simulation): "))
+fps = 60 #int(input("Please enter your desired fps (higher = faster simulation): "))
 jmss = Graphics(width = width, height = height, title = "Test Game", fps = fps)
 
 M1x = width / 3
@@ -24,17 +24,21 @@ def Game():
         jmss.drawImage("mario.png" , x = M1x , y = 0)
 
 
-
-    if (M2y >= 20) :
+    if (M2y >= 5) :
         jmss.drawImage('mario.png' , x = M2x , y = M2y)
 
     else:
-        TFall = -((2/3)*TFall)
+        TFall = -((7/10)*TFall)
         jmss.drawImage("mario.png" , x = M2x , y = 0)
+    if (M2y <= 5):
+        M2y = 0
+        M2x -= 0.5
 
+    jmss.drawText("Mario2's Co-ordinates: (" + str(int(M2x)) + ", " + str(int(M2y)) + ")",x = 0 ,y = 0 )
 
     M1y += 6*G          #Linear Movement
     M2y += (G*TFall)     #Non-Linear Movement
+    M2x += 0.5
     TFall += 1
     #print(M2y)
 
