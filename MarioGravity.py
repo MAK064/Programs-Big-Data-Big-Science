@@ -19,22 +19,20 @@ def Game():
     jmss.clear(0,0,0,1)
     if (M1y >= 0) :
         jmss.drawImage("mario.png" , x = M1x , y = M1y)
-
     else:
         jmss.drawImage("mario.png" , x = M1x , y = 0)
 
-
     if (M2y >= 5) :
         jmss.drawImage('mario.png' , x = M2x , y = M2y)
-
     else:
-        TFall = -((7/10)*TFall)
+        TFall = -((7/10)*TFall)                                 #Detirmines how much velocity carries over after bouncing
         jmss.drawImage("mario.png" , x = M2x , y = 0)
+
     if (M2y <= 5):
         M2y = 0
         M2x -= 0.5
 
-    jmss.drawText("Mario2's Co-ordinates: (" + str(int(M2x)) + ", " + str(int(M2y)) + ")",x = 0 ,y = 0 )
+    jmss.drawText("Mario2's Co-ordinates: (" + str(int(M2x)) + ", " + str(int(M2y)) + ")",x = 0 ,y = 0)
 
     M1y += 6*G          #Linear Movement
     M2y += (G*TFall)     #Non-Linear Movement
