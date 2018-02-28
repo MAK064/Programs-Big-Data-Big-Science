@@ -29,13 +29,13 @@ def Game():
         M2y += (G*TFall)
 
     elif(M2y < 1):
-        TFall = -((7/10)*TFall)                                 #Detirmines how much velocity carries over after bouncing
         jmss.drawImage("mario.png" , x = M2x , y = 0)
+        TFall = -((7/10)*TFall)                                 #Detirmines how much velocity carries over after bouncing
         M2y += (G*TFall)
 
-    if (M2y <= 5):
-        M2y = 0
+    if (M2y <= 5):                                              #Checks if M2Y is still below 5
         M2x -= 0.5
+        M2y = 0
 
     jmss.drawText("Mario2's Co-ordinates: (" + str(int(M2x)) + ", " + str(int(M2y)) + ")",x = 0 ,y = 0)
     jmss.drawText("Mario1's Co-ordinates: (" + str(int(M1x)) + ", " + str(int(M1y)) + ")",x = 0 ,y = 13)
