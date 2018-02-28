@@ -24,6 +24,7 @@ def Game():
         jmss.drawImage("mario.png" , x = M1x , y = 0)
         M1y = 0
 
+
     if (M2y >= 1) :
         jmss.drawImage('mario.png' , x = M2x , y = M2y)
         M2y += (G*TFall)
@@ -37,11 +38,11 @@ def Game():
         M2x -= 0.5
         M2y = 0
 
+
     jmss.drawText("Mario2's Co-ordinates: (" + str(int(M2x)) + ", " + str(int(M2y)) + ")",x = 0 ,y = 0)
     jmss.drawText("Mario1's Co-ordinates: (" + str(int(M1x)) + ", " + str(int(M1y)) + ")",x = 0 ,y = 13)
 
     M2x += 0.5
     TFall += 1
-
 
 jmss.run()
