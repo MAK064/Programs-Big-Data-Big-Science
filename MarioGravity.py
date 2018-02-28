@@ -24,7 +24,7 @@ def Game():
         jmss.drawImage("mario.png" , x = M1x , y = 0)
         M1y = 0
 
-    if (M2y >= 5) :
+    if (M2y >= 1) :
         jmss.drawImage('mario.png' , x = M2x , y = M2y)
         M2y += (G*TFall)
 
@@ -33,7 +33,7 @@ def Game():
         TFall = -((7/10)*TFall)                                 #Detirmines how much velocity carries over after bouncing
         M2y += (G*TFall)
 
-    if (M2y <= 5):                                              #Checks if M2Y is still below 5
+    if (M2y <= 1):                                              #Checks if M2Y is still below 5
         M2x -= 0.5
         M2y = 0
 
