@@ -1,2 +1,2 @@
 # Programs
-A place to put my work from JMSS's "Big Data Big Science" class
+A place to put my code from classes at JMSS
