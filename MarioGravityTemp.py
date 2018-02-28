@@ -33,6 +33,9 @@ def Game():
         jmss.drawImage("mario.png" , x = M2x , y = 0)
         M2y += (G*TFall)
 
+    #print(M2y)
+    #print(TFall)
+
     if (M2y <= 5):
         M2y = 0
         M2x -= 0.5
