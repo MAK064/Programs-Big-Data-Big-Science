@@ -1,4 +1,5 @@
 from JMSSGraphics import *
+import math
 
 # Dimentions
 width = 1200
@@ -12,7 +13,7 @@ BallX = 1/3*width
 BallY = 2/3*height
 TFall = 0
 direction = 1
-momentum = 5
+momentum = 
 G = -2/6
 
 @jmss.mainloop

@@ -1,6 +1,6 @@
 from JMSSGraphics import *
 import math
-jmss = Graphics(width = 1200, height = 800, title = "Test Game", fps = 60)
+jmss = Graphics(width = 1200, height = 800, title = "Test Game", fps = 20)
 width = 1200
 height = 800
 M1x = 400
