@@ -4,7 +4,7 @@ import random
 # Dimentions
 width = 1200
 height = 800
-fps = 60
+fps = 30
 
 jmss = Graphics(width = width, height = height, title = "Bouncing Ball", fps = fps)
 
@@ -39,33 +39,34 @@ def simulation():
     jmss.clear(0,0,0,1)
 
     #Does logic for the ball when inbetween top and bottom of screen
-    if 0 <= BallY < (height - 64):
+    if 0 < BallY < (height - 64):
         BallX += direction*momentum
         BallY += G*TFall
 
     #Does logic for the ball when above top of screen
-    elif BallY > (height - 64):
+    if BallY > (height - 64):
         TFall = TFall*(-0.98)
         BallX += direction * momentum
         BallY = height - 65
 
     #Does logic for the ball when below screen
-    else:
+    if BallY < 0:
         TFall = TFall*(-0.98)
         BallX += direction * momentum
         BallY = 1
 
     #Logic for x direcion reversal
-    if (0 >= BallX or BallX >= (width - 64)):
+    if (0 > BallX or BallX > (width - 64)):
         direction = direction*(-1)
-
-    #Draws text onscreen displaying info
-    jmss.drawText("Ball's Position is: (" + str(int(BallX)) + ", " + str(int(BallY)) + ")" , x = 0, y = 0)
-    jmss.drawText("G = " + str(G/(2/6))  , x = width - 68, y = 0)
-    jmss.drawText("Ball's sideways momentum is ~ " + str(int(momentum)) , x = width - 205, y = 12)
 
     #Draws the ball from memory
     jmss.drawImage( ball , x = BallX, y = BallY)
+
+    #Draws text onscreen displaying info
+    jmss.drawText("Ball's Position is: (" + str(int(BallX)) + ", " + str(int(BallY)) + ")" , x = 0, y = 0)
+    jmss.drawText("G = " + str(G/(2/6)*-1)  , x = width - 68, y = 0)
+    jmss.drawText("Ball's sideways momentum is ~ " + str(int(momentum)) , x = width - 205, y = 12)
+
 
     #Increment timefalling
     TFall += 1
