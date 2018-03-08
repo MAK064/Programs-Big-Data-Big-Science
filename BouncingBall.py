@@ -36,7 +36,14 @@ ball = jmss.loadImage("ball.png")
 def simulation():
     global BallX, BallY, TFall, G, width, direction, momentum
 
-    jmss.clear(0,0,0,1)
+    if jmss.isKeyDown(KEY_UP):
+        G += 1/60
+    if jmss.isKeyDown(KEY_DOWN):
+        G -= 1/60
+    if jmss.isKeyDown(KEY_LEFT):
+        momentum -= 0.1
+    if jmss.isKeyDown(KEY_RIGHT):
+        momentum += 0.1
 
     #Does logic for the ball when inbetween top and bottom of screen
     if 0 < BallY < (height - 64):
@@ -59,7 +66,10 @@ def simulation():
     if (0 > BallX or BallX > (width - 64)):
         direction = direction*(-1)
 
-    #Draws the ball from memory
+    #Clears screen to be drawn
+    jmss.clear(0,0,0,1)
+
+    #Draws the ball from memor
     jmss.drawImage( ball , x = BallX, y = BallY)
 
     #Draws text onscreen displaying info
