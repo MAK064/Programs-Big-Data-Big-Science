@@ -11,6 +11,10 @@ bax = width/2
 bay = height/2
 xdir = 1
 ydir = 1
+p1x
+p1y
+p2x
+p2y
 
 Ball = jmss.loadImage("ball.png")
 
