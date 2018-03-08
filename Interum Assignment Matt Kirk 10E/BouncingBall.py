@@ -4,7 +4,7 @@ import random
 # Dimentions
 width = 1200
 height = 800
-fps = 30
+fps = 60
 
 jmss = Graphics(width = width, height = height, title = "Bouncing Ball", fps = fps)
 
@@ -78,7 +78,7 @@ def simulation():
     jmss.drawText("Ball's Position is: (" + str(int(BallX)) + ", " + str(int(BallY)) + ")" , x = 0, y = 0)
     jmss.drawText("G = " + str(G/(2/6)*-1)  , x = width - 68, y = 0)
     jmss.drawText("Ball's sideways momentum is ~ " + str(int(momentum)) , x = width - 215, y = 12)
-    jmss.drawText("""Try the "W,A,S,D" Keys!""", x = 8, y = height - 22)
+    jmss.drawText("""Try the "W","A","S","D" Keys!""", x = 8, y = height - 22)
 
 
     #Increment timefalling
