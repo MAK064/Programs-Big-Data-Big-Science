@@ -12,11 +12,11 @@ bay = height/2
 xdir = 1
 ydir = 1
 
-p1x = 1/12*width
-p1y = 1/2*height
+p1x = 1/12*width - 16
+p1y = 1/2*height - 64
 
-p2x = 11/12*width
-p2y = 1/2*height
+p2x = 11/12*width - 16
+p2y = 1/2*height - 64
 
 
 Ball = jmss.loadImage("ball.png")
@@ -35,7 +35,10 @@ def Pong ():
     if jmss.isKeyDown(KEY_K):
         p2y -= 3
 
-    if (bax == (1/12*width)-32 and (p1y - 32) <= bax <= (p1y + 64)):
+    bax += 5*xdir
+    bay += 5*ydir
+
+    if ((bax <= p1x + 16 and p1y - 128 < bay < p1y + 48) or (bax >= p2x - 56 and p2y - 64 < bay < p2y + 144)):
         xdir = -xdir
 
     if (bax > width - 64 or bax < 0):
@@ -43,12 +46,9 @@ def Pong ():
     if (bay > height - 64 or bay < 0):
         ydir = -ydir
 
-    bax += 5*xdir
-    #bay += 5*ydir
-
     jmss.clear()
     jmss.drawImage(Ball, x = bax, y = bay)
-    jmss.drawImage(Paddle, x = p1x, y = p1y + 64)
-    jmss.drawImage(Paddle, x = p2x, y = p2y + 64)
+    jmss.drawImage(Paddle, x = p1x, y = p1y - 64)
+    jmss.drawImage(Paddle, x = p2x, y = p2y - 64)
 
 jmss.run()
