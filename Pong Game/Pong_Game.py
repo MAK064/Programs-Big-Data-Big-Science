@@ -81,6 +81,16 @@ def Pong ():
         jmss.drawText("Pong", x = width/2 - 50, y = height - height/5, fontSize = 40)
         jmss.drawText("Press Space to play" , width/2 - 100, 50, fontSize = 20)
 
+    #Win screen amd reset
+    if gamestate == "end":
+        if jmss.isKeyDown(KEY_SPACE):
+            gamestate = "null"
+            time.sleep(0.5)
+
+        jmss.clear()
+        jmss.drawText("Congratulations player " + str(winner) + ", you win!", 275 , height/2, fontSize = 30)
+        jmss.drawText("Press Space to play again" , 500, 50, fontSize = 10)
+
     #Game code
     if gamestate == "play":
 
@@ -134,15 +144,5 @@ def Pong ():
 
         #Draws everything for the game
         gameDraw()
-
-    #Win screen amd reset
-    if gamestate == "end":
-        if jmss.isKeyDown(KEY_SPACE):
-            gamestate = "null"
-            time.sleep(0.5)
-
-        jmss.clear()
-        jmss.drawText("Congratulations player " + str(winner) + ", you win!", 275 , height/2, fontSize = 30)
-        jmss.drawText("Press Space to play again" , 500, 50, fontSize = 10)
 
 jmss.run()
