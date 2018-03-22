@@ -8,11 +8,13 @@ height = 800
 fps = 60
 jmss = Graphics(width = width, height = height, title = "Bouncing Ball", fps = fps)
 
-#Load images
+#Load images and sounds
 Ball = jmss.loadImage("ball.png")
 Paddle = jmss.loadImage("Pong Paddle.jpg")
 GreenZ = jmss.loadImage("Green Zone.png")
 RedZ = jmss.loadImage("RedZone.png")
+p1blip = jmss.loadSound("BlipF4.wav", False)
+p2blip = jmss.loadSound("BlipF5.wav", False)
 
 #Sets initial gamestate
 gamestate = "null"
@@ -65,8 +67,8 @@ def gameReset():
 #Draws objects in the game
 def gameDraw():
     jmss.clear()
-    jmss.drawImage(GreenZ, Greenx, 0)
     jmss.drawImage(RedZ, Redx, 0)
+    jmss.drawImage(GreenZ, Greenx, 0)
     jmss.drawImage(Ball, x = bax, y = bay)
     jmss.drawImage(Paddle, x = p1x, y = p1y)
     jmss.drawImage(Paddle, x = p2x, y = p2y)
@@ -76,7 +78,7 @@ def gameDraw():
 @jmss.mainloop
 #Game logic
 def Pong ():
-    global bax, bay, xdir, ydir, height, p1y, p1x, p2y, p2x, p1score, p2score, gamestate, winner, reset
+    global bax, bay, xdir, ydir, height, p1y, p1x, p2y, p2x, p1score, p2score, gamestate, winner, reset, p1blip, p2blip
 
     #Runs game reset
     if gamestate == "null":
@@ -123,19 +125,21 @@ def Pong ():
         bax += 7*xdir
 
         if Greenx - 64 < bax < Greenx + 192:
-            bay += 7*ydir*2.5
+            bay += 7*ydir*2
         elif Redx - 64 < bax < Redx + 192:
             bay += 7*ydir*0.4
         else:
             bay += 7*ydir
 
         #Paddle collision
-        if (p1x <= bax <= p1x + 30 and p1y - 48 < bay < p1y + 112):
+        if (p1x <= bax <= p1x + 30 and p1y - 64 < bay < p1y + 128):
             xdir = -xdir
             bax = p1x + 32
-        if (p2x >= bax >= p2x - 62 and p2y - 48 < bay < p2y + 112):
+            jmss.playSound(p1blip, False)
+        if (p2x >= bax >= p2x - 62 and p2y - 64 < bay < p2y + 128):
             xdir = -xdir
             bax = p2x - 64
+            jmss.playSound(p2blip, False)
 
         #Checks if ball hits the ceiling/ floor (Collision with top/bottom walls)
         if bay > height - 64:
