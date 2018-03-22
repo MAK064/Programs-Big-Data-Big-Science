@@ -11,13 +11,15 @@ jmss = Graphics(width = width, height = height, title = "Bouncing Ball", fps = f
 #Load images
 Ball = jmss.loadImage("ball.png")
 Paddle = jmss.loadImage("Pong Paddle.jpg")
+GreenZ = jmss.loadImage("Green Zone.png")
+RedZ = jmss.loadImage("RedZone.png")
 
 #Sets initial gamestate
 gamestate = "null"
 
 #Resets game after a point
 def pointReset():
-    global bax, bay, xdir, ydir, p1x, p1y, p2x, p2y, p1score, p2score, width, height, reset
+    global bax, bay, xdir, ydir, p1x, p1y, p2x, p2y, p1score, p2score, width, height, reset, Redx, Greenx
     bax = width/2
     bay = height/2
 
@@ -40,6 +42,12 @@ def pointReset():
     p2x = 11/12*width - 16
     p2y = 1/2*height - 64
 
+    #Red Zone Placement
+    Redx = random.randint(p1x + 16, p2x - 144)
+
+    #Green Zone Placement
+    Greenx = random.randint(p1x + 16, p2x - 144)
+
     #Detirmines if reset has occured
     reset = 1
 
@@ -57,6 +65,8 @@ def gameReset():
 #Draws objects in the game
 def gameDraw():
     jmss.clear()
+    jmss.drawImage(GreenZ, Greenx, 0)
+    jmss.drawImage(RedZ, Redx, 0)
     jmss.drawImage(Ball, x = bax, y = bay)
     jmss.drawImage(Paddle, x = p1x, y = p1y)
     jmss.drawImage(Paddle, x = p2x, y = p2y)
@@ -101,29 +111,40 @@ def Pong ():
 
         #Key Checks and respective movements
         if jmss.isKeyDown(KEY_W):
-            p1y += 5
+            p1y += 7
         if jmss.isKeyDown(KEY_S):
-            p1y -= 5
+            p1y -= 7
         if jmss.isKeyDown(KEY_I):
-            p2y += 5
+            p2y += 7
         if jmss.isKeyDown(KEY_K):
-            p2y -= 5
+            p2y -= 7
 
         #Ball movement
         bax += 7*xdir
-        bay += 7*ydir
+
+        if Greenx - 64 < bax < Greenx + 192:
+            bay += 7*ydir*2.5
+        elif Redx - 64 < bax < Redx + 192:
+            bay += 7*ydir*0.4
+        else:
+            bay += 7*ydir
 
         #Paddle collision
-        if (bax <= p1x + 30 and p1y - 48 < bay < p1y + 112):
+        if (p1x <= bax <= p1x + 30 and p1y - 48 < bay < p1y + 112):
             xdir = -xdir
             bax = p1x + 32
-        if (bax >= p2x - 62 and p2y - 48 < bay < p2y + 112):
+        if (p2x >= bax >= p2x - 62 and p2y - 48 < bay < p2y + 112):
             xdir = -xdir
             bax = p2x - 64
 
         #Checks if ball hits the ceiling/ floor (Collision with top/bottom walls)
-        if (bay > height - 64 or bay < 0):
+        if bay > height - 64:
             ydir = -ydir
+            bay = height - 64
+        elif bay < 0:
+            ydir = -ydir
+            bay = 0
+
 
         #Checks if a player has scored (Collision with a side wall)
         if (bax > width - 64 or bax < 0):
