@@ -94,6 +94,13 @@ def Pong ():
         #Draws the start screen
         jmss.clear()
         jmss.drawText("Pong", x = width/2 - 50, y = height - height/5, fontSize = 40)
+        jmss.drawText("Controls", width/5, 3*height/5, fontSize = 30)
+        jmss.drawText("Player 1: Use 'W' and 'S' to move up and down", width/10, 5*height/10, fontSize = 15)
+        jmss.drawText("Player 2: Use 'I' and 'K' to move up and down", width/10, 5*height/10 - 20, fontSize = 15)
+        jmss.drawText("Information", 3*width/5+100, 3*height/5, fontSize = 30)
+        jmss.drawText("The first player to get to five points wins", 6*width/10, 5*height/10, fontSize = 15)
+        jmss.drawText("The green zone makes the ball move faster", 6*width/10, 5*height/10 - 20, fontSize = 15)
+        jmss.drawText("The red zone makes the ball move slower", 6*width/10, 5*height/10 - 40, fontSize = 15)
         jmss.drawText("Press Space to play" , width/2 - 100, 50, fontSize = 20)
 
     #Win screen amd reset
