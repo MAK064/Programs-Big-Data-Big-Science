@@ -72,8 +72,8 @@ def gameDraw():
     jmss.drawImage(Ball, x = bax, y = bay)
     jmss.drawImage(Paddle, x = p1x, y = p1y)
     jmss.drawImage(Paddle, x = p2x, y = p2y)
-    jmss.drawText("Player 1's score is: " + str(p1score) , x = 0, y = height - 16)
-    jmss.drawText("Player 2's score is: " + str(p2score) , x = width - 130, y = height - 16)
+    jmss.drawText(str(p1score) , x = 75, y = height - 64, fontSize = 40)
+    jmss.drawText(str(p2score) , x = width - 130, y = height - 64, fontSize = 40)
 
 @jmss.mainloop
 #Game logic
