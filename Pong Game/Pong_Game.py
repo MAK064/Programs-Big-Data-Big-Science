@@ -13,8 +13,8 @@ Ball = jmss.loadImage("ball.png")
 Paddle = jmss.loadImage("Pong Paddle.jpg")
 GreenZ = jmss.loadImage("Green Zone.png")
 RedZ = jmss.loadImage("RedZone.png")
-p1blip = jmss.loadSound("BlipF4.wav", False)
-p2blip = jmss.loadSound("BlipF5.wav", False)
+p1blip = jmss.loadSound("BlipF4.wav")
+p2blip = jmss.loadSound("BlipF5.wav")
 
 #Sets initial gamestate
 gamestate = "null"
@@ -72,8 +72,8 @@ def gameDraw():
     jmss.drawImage(Ball, x = bax, y = bay)
     jmss.drawImage(Paddle, x = p1x, y = p1y)
     jmss.drawImage(Paddle, x = p2x, y = p2y)
-    jmss.drawText("Player 1's score is: " + str(p1score) , x = 0, y = height - 14)
-    jmss.drawText("Player 2's score is: " + str(p2score) , x = width - 130, y = height - 14)
+    jmss.drawText("Player 1's score is: " + str(p1score) , x = 0, y = height - 16)
+    jmss.drawText("Player 2's score is: " + str(p2score) , x = width - 130, y = height - 16)
 
 @jmss.mainloop
 #Game logic
@@ -87,18 +87,23 @@ def Pong ():
 
     #Start screen
     if gamestate == "start":
+        #Checks if the space bar is down to start the game
         if jmss.isKeyDown(KEY_SPACE):
             gamestate = "play"
+
+        #Draws the start screen
         jmss.clear()
         jmss.drawText("Pong", x = width/2 - 50, y = height - height/5, fontSize = 40)
         jmss.drawText("Press Space to play" , width/2 - 100, 50, fontSize = 20)
 
     #Win screen amd reset
     if gamestate == "end":
+        # Checks if the space bar is down to reset the game
         if jmss.isKeyDown(KEY_SPACE):
             gamestate = "null"
             time.sleep(0.5)
 
+        #Draws the end screen
         jmss.clear()
         jmss.drawText("Congratulations player " + str(winner) + ", you win!", 275 , height/2, fontSize = 30)
         jmss.drawText("Press Space to play again" , 500, 50, fontSize = 10)
@@ -122,8 +127,10 @@ def Pong ():
             p2y -= 7
 
         #Ball movement
+        #Moves the ball in the x direction
         bax += 7*xdir
 
+        #Checks if the ball is in the green/red box and applies appropriate y movement
         if Greenx - 64 < bax < Greenx + 192:
             bay += 7*ydir*2
         elif Redx - 64 < bax < Redx + 192:
@@ -132,6 +139,7 @@ def Pong ():
             bay += 7*ydir
 
         #Paddle collision
+        #If the ball would make contact with paddle 1 or 2 it snaps the ball to the paddle and reverses the direction it goes in
         if (p1x <= bax <= p1x + 30 and p1y - 64 < bay < p1y + 128):
             xdir = -xdir
             bax = p1x + 32
@@ -159,7 +167,7 @@ def Pong ():
                 p2score += 1
                 pointReset()
 
-        #Win detection
+        #If a player hits 5 points, the game goes into the end state
         if p1score == 5:
             gamestate = "end"
             winner = 1
