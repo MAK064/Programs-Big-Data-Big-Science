@@ -42,4 +42,4 @@ while True:
     handDisplay(p1)
     handDisplay(dealer)
     handDisplay(deck)
-    wait = input("Press enter to continue")
+    wait = input("Press enter to reset")
