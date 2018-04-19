@@ -15,7 +15,7 @@ ball_pos = [0,0]
 def Parabola():
     global ball_pos
     while ball_pos[0] <= 1200:
-        ball_pos[1] = math.sin(ball_pos[0])*64
+        ball_pos[1] = math.sin(ball_pos[0])*128
         jmss.drawImage(ball, ball_pos[0], ball_pos[1] + 300)
         ball_pos[0] += 32
 jmss.run()
