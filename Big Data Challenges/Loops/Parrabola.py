@@ -14,8 +14,12 @@ ball_pos = [0,0]
 @jmss.mainloop
 def Parabola():
     global ball_pos
-    while ball_pos[0] <= 1200:
-        ball_pos[1] = math.sin(ball_pos[0])*128
-        jmss.drawImage(ball, ball_pos[0], ball_pos[1] + 300)
-        ball_pos[0] += 32
+
+    ball_pos[0] = 0
+    jmss.clear(0,0,0,1)
+
+    while ball_pos[0] <= 1152:
+        ball_pos[1] = (ball_pos[0]-568)*(ball_pos[0]-568)/600
+        jmss.drawImage(ball, ball_pos[0], ball_pos[1])
+        ball_pos[0] += 50
 jmss.run()
