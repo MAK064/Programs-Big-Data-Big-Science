@@ -11,10 +11,11 @@ ball = jmss.loadImage("ball.png")
 
 ball_pos = [0,0]
 speed = 0
+count = 0
 
 @jmss.mainloop
 def Parabola():
-    global ball_pos, speed
+    global ball_pos, speed, count
 
     ball_pos[0] = 0
     jmss.clear(0,0,0,1)
@@ -22,8 +23,12 @@ def Parabola():
     while ball_pos[0] <= 1152:
         ball_pos[1] = 200*math.sin(2*ball_pos[0] - speed)+400
         jmss.drawImage(ball, ball_pos[0], ball_pos[1])
-        ball_pos[0] += 25
+        ball_pos[0] += (22 + count)
 
-    speed += 0.05
+    jmss.drawText(str(count + 22), 0, 0)
+
+    if jmss.isKeyDown(KEY_SPACE) != True:
+        count += 0.003
+    speed += 0.03
 
 jmss.run()
