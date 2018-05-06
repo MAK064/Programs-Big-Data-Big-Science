@@ -9,7 +9,7 @@ term = 0
 
 print(Pi*4)
 
-while count <= 10000:
+while True: #count <= 10000:
     term = 1/((1+(count*2))*(1+(count*2)))
     Pi += term
     print("(" + str(int(count)) + ")" + str(math.sqrt(Pi*8)))
