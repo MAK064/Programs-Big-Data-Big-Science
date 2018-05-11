@@ -13,7 +13,7 @@ frames_jumping = []
 
 #Sets the Y values for the clouds and ground
 Cloud_Y = 600
-Ground_Y = 191
+Ground_Y = 91
 
 #Initiates initial positions for Clouds and Ground
 Cloud_Positions = [[0,Cloud_Y],[800,Cloud_Y],[1600,Cloud_Y]]
@@ -37,14 +37,14 @@ for i in range(1,6):
 
     #Loads Clouds and Background images
 Cloud = jmss.loadImage("Animation and background images/clouds.png")
-Bg = jmss.loadImage("Animation and background images/bg.png")
+BGround = jmss.loadImage("Animation and background images/bg.png")
 
 #Does logic and draws Aladdin when he is running
 def Running():
-    global Run_Counter, count
+    global Run_Counter , count
 
     #Uses Run_Counter to detirmine which frame to draw
-    jmss.drawImage(frames_running[Run_Counter], width/2 - 86, height/2 - 122)
+    jmss.drawImage(frames_running[Run_Counter], width/2 - 86, height/2 - 222)
 
     #Every 6th display frame increments the Run_Counter
     if count % 6 == 0:
@@ -55,25 +55,25 @@ def Running():
 
 #Does logic and draws Aladdin when he is jumping
 def Jumping():
-    global Jump_Counter, count
+    global Jump_Counter , count
 
     #Uses Jump_Counter to detirmine which frame to draw
-    jmss.drawImage(frames_jumping[Jump_Counter], width/2 - 86, (height/2 - 122)+(-30*(Jump_Counter-1.75)**2+250))
+    jmss.drawImage(frames_jumping[Jump_Counter], width/2 - 86, (height/2 - 222)+(-30*(Jump_Counter-1.75)**2+250))
 
     #Every 6th display frame increments the Jump_Counter
     if count % 6 == 0:
         Jump_Counter +=1
     #When the Jump_Counter reaches the length of the animation, reset it
-    if Jump_Counter >= 5:
+    if Jump_Counter >= len(frames_jumping):
         Jump_Counter = 0
 #Does logic and drawing for the clouds
 def Clouds():
-    global Cloud_Counter,Cloud_Positions
+    global Cloud_Counter , Cloud_Positions
 
     #Every 4th display frame moves all the clouds
     if Cloud_Counter % 4 == 0:
         for element in Cloud_Positions:
-            element[0] -= 5
+            element[0] -= 10
 
     #For each cloud image
     for element in Cloud_Positions:
@@ -87,12 +87,12 @@ def Clouds():
 
 #Does logic and drawing for the ground
 def Ground():
-    global Ground_Counter,Ground_Positions
+    global Ground_Counter , Ground_Positions
 
     #Every 6th display frame moves the ground
     if Ground_Counter % 6 == 0:
         for element in Ground_Positions:
-            element[0] -= 8
+            element[0] -= 16
 
     #For each ground image
     for element in Ground_Positions:
@@ -100,14 +100,14 @@ def Ground():
         if element[0] <= -800:
             element[0] = 1600
         #Draws the ground
-        jmss.drawImage(Bg , element[0] , element[1])
+        jmss.drawImage(BGround , element[0] , element[1])
 
     Ground_Counter += 1
 
 #The animation logic
 @jmss.mainloop
 def Animation():
-    global count, Run_Counter
+    global count , Run_Counter
     jmss.clear(0,0,0,1)
 
     #Detirmines if Aladdin should be jumping or not
