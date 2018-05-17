@@ -2,25 +2,27 @@ sort = [2,1]
 out = []
 
 class Sorting:
-    def compare(a , b):
+    def compare(self , a , b):
+
         if a <= b:
             return True
         else:
             return False
 
-    def swap(a , b):
+    def swap(self , a , b):
+        print(a,b)
         c = a
         a = b
         b = c
+        print(a,b)
 
         return([a , b])
 
-    def twoSort(a , b , c):
-        print(a , b ,c)
+    def twoSort(self , a , b):
         if s.compare(a , b) == True:
-            out = s.swap(a , b)
+            out.append(s.swap(a , b))
         else:
-            out = [a , b]
+            out.append([a , b])
 
 s = Sorting()
 
