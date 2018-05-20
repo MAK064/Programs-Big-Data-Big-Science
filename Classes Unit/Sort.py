@@ -3,7 +3,6 @@ out = []
 
 class Sorting:
     def compare(self , a , b):
-
         if a <= b:
             return True
         else:
