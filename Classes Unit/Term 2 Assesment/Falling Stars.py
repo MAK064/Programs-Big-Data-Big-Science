@@ -1,4 +1,4 @@
-from Particle import *
+from JMSSGraphicsV124 import *
 import random
 
 width = 1200
@@ -7,15 +7,29 @@ fps = 60
 
 jmss = Graphics(width = width, height = height, title = "Luigi" , fps = fps)
 
+class Particle():
+    def __init__(self, img = None, x = 0, y = 0, vel_x = 0, vel_y = 0, acc_x = 0, acc_y = 0, \
+                 width = None, height = None, lifetime = 0, life = 0, opacity = 1.0, weight = 0):
+        self.x = x
+        self.y = y
+
+        self.weight = weight
+
+        self.vel_x = vel_x
+        self.vel_y = vel_y
+
+        self.img = img
+
+
 particle_list = []
 particle_img = jmss.loadImage("star.png")
 
 for i in range(0,250):
     star = Particle()
-    star.x = random.randint(-42,1158)
-    star.y = random.randint(-42,758)
+    star.x = random.randint(-42,1200)
+    star.y = random.randint(-42,800)
     star.vel_x = random.randint(-5,5)
-    star.vel_y = random.randint(-5,-1)
+    star.vel_y = random.randint(-10,-1)
     star.img = particle_img
     particle_list.append(star)
 

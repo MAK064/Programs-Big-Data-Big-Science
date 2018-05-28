@@ -13,11 +13,15 @@ while True:
     def cypherBox(key, encode = 0):
         global out
         if encode == 0:
-            key = -1*key
+            key *= -1
         for element in range(0,len(code)):
             code[element] = (code[element] + key)
             code[element] = chr(code[element])
             out += str(code[element])
+            if encode == 0:
+                key -= 1
+            else:
+                key += 1
 
     cypherBox(inKey , cypher)
 

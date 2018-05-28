@@ -1,7 +1,7 @@
 from JMSSGraphics import *
 
-width = 1200 #int(input("Please enter your desired width (>450 reccomended): "))
-height = 800 #int(input("Please enter your desired height (>300 reccomended): "))
+width = int(input("Please enter your desired width (>450 reccomended): "))
+height = int(input("Please enter your desired height (>300 reccomended): "))
 fps = 60 #int(input("Please enter your desired fps (higher = faster simulation): "))
 jmss = Graphics(width = width, height = height, title = "Test Game", fps = fps)
 
