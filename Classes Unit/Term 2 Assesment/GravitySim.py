@@ -30,7 +30,7 @@ class Particle():
 
 particle_list = []
 
-for i in range(0,3):
+for i in range(0,2):
     p = Particle()
     p.x = random.randint(0,1200)
     p.y = random.randint(0,800)
