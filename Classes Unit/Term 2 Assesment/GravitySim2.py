@@ -6,9 +6,11 @@ width = 1200
 height = 800
 fps = 60
 
-particle_amount = int(input("Input how many objects (2-200 reccomended):"))
+particle_amount = int(input("Input how many objects (200-400 reccomended):"))
 g = 2/particle_amount
-d = 50/1
+d = 20/1
+box1 = 50
+box2 = 25
 
 jmss = Graphics(width = width, height = height, title = "Gravity Sim" , fps = fps)
 
@@ -47,8 +49,8 @@ def particleSpawn(x1 = 0, x2 = width, y1 = 0, y2 = height, amount = 1):
         p.x_acc = 0
         p.y_acc = 0
 
-        p.x_vel = random.randint(-1,1)
-        p.y_vel = random.randint(-1,1)
+        p.x_vel = 0#random.randint(-1,1)
+        p.y_vel = 0#random.randint(-1,1)
 
         if p.mass < 600/3:
             p.b = 1
@@ -82,6 +84,7 @@ def screenCheck():
             if (particle_list[i].x > width + 1 or particle_list[i].x < -1 or \
             particle_list[i].y > height + 1 or particle_list[i].y < -1):
                 del particle_list[i]
+
 def physicsApplication(i):
     particle_list[i].x_vel += particle_list[i].x_grav / particle_list[i].mass
     particle_list[i].y_vel += particle_list[i].y_grav / particle_list[i].mass
@@ -91,17 +94,18 @@ def physicsApplication(i):
 
 def drawParticle(i):
     jmss.drawPixel(int(particle_list[i].x),int(particle_list[i].y),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
-    jmss.drawPixel(int(particle_list[i].x) + 1,int(particle_list[i].y),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
-    jmss.drawPixel(int(particle_list[i].x) - 1,int(particle_list[i].y),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
-    jmss.drawPixel(int(particle_list[i].x),int(particle_list[i].y + 1),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
-    jmss.drawPixel(int(particle_list[i].x),int(particle_list[i].y - 1),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
+    #jmss.drawPixel(int(particle_list[i].x) + 1,int(particle_list[i].y),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
+    #jmss.drawPixel(int(particle_list[i].x) - 1,int(particle_list[i].y),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
+    #jmss.drawPixel(int(particle_list[i].x),int(particle_list[i].y + 1),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
+    #jmss.drawPixel(int(particle_list[i].x),int(particle_list[i].y - 1),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
 
 @jmss.mainloop
 def Sim():
-    global particle_list,particle_amount
-
+    global particle_list, particle_amount, box1, width, height
     jmss.clear()
-    particleSpawn(width/2 - 250,width/2 + 250,height/2 - 250, height/2 + 250, particle_amount)
+
+    particleSpawn(width/2 - box1,width/2 + box1,height/2 - box1, height/2 + box1, particle_amount/2)
+    particleSpawn(100, width/2, 100, height/2, particle_amount/2)
 
     for i in range(0 , len(particle_list)):
         for a in range(0 , len(particle_list)):
