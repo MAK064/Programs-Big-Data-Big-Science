@@ -2,18 +2,21 @@ from JMSSGraphicsV124 import *
 import random
 import math
 
+#Sets screen info
 width = 1200
 height = 800
-fps = 60
+fps = -1
 
-particle_amount = int(input("Input how many objects (200-400 reccomended):"))
-g = 2/particle_amount
-d = 20/1
-box1 = 50
-box2 = 25
+#particle system data
+particle_amount = int(input("Input how many objects (100-200 reccomended, 500+ possible):"))
+g = 2/(1*particle_amount)
+dilation = 80/1
+box1 = 250
+particle_list = []
 
 jmss = Graphics(width = width, height = height, title = "Gravity Sim" , fps = fps)
 
+#Sets up the particle class
 class Particle():
     def __init__(self, img = None, x = 0, y = 0, x_vel = 0, y_vel = 0, x_acc = 0, y_acc = 0, \
                  width = None, height = None, lifetime = 0, life = 0, opacity = 1.0, \
@@ -36,89 +39,108 @@ class Particle():
         self.x_grav = x_grav
         self.y_grav = y_grav
 
-particle_list = []
-
-def particleSpawn(x1 = 0, x2 = width, y1 = 0, y2 = height, amount = 1):
+#Function to spawn particles when required
+def particleSpawn(radius = 50, amount = 1):
+    #While there are less then the specified amount of particles on the screen
     while len(particle_list) < amount:
         p = Particle()
-        p.x = random.randint(x1,x2)
-        p.y = random.randint(y1,y2)
 
-        p.mass = random.randint(20,400)
+        #Sets x and y values to be within a circle
+        x_temp = 0
+        x = random.randint(-1*radius,radius)
+        p.y = random.randint(int(height/2 - math.sqrt(radius**2 - x**2)),int(height/2 + math.sqrt(radius**2 - x**2)))
+        p.x = x + width/2
 
-        p.x_acc = 0
-        p.y_acc = 0
+        #Random mass generation
+        p.mass = random.randint(40,800)
 
-        p.x_vel = 0#random.randint(-1,1)
-        p.y_vel = 0#random.randint(-1,1)
+        #Determines the inital velocity
+        p.x_vel = random.random() - 0.5
+        p.y_vel = random.random() - 0.5
 
-        if p.mass < 600/3:
+        #Gives each particle a colour based on mass
+        if p.mass < 1200/3:
             p.b = 1
-        if 400/3 < p.mass < 1000/3:
+        if 800/3 < p.mass < 2000/3:
             p.g = 1
-        if 800/3 < p.mass < 400:
+        if 1600/3 < p.mass < 800:
             p.r = 1
 
         particle_list.append(p)
 
+#Calculates the force of gravity between any two given objects
 def Gravity_Calc(ob1 , ob2):
-    global x_grav, y_grav, x_grav_multi, y_grav_multi, d
+    global x_grav, y_grav, x_grav_multi, y_grav_multi, dilation
 
-    x_grav = 0
-    y_grav = 0
-
-    x_distance = (ob2.x * d) - (ob1.x * d)
-    y_distance = (ob2.y * d) - (ob1.y * d)
+    #Calculates the distances between given particles
+    x_distance = (ob2.x * dilation) - (ob1.x * dilation)
+    y_distance = (ob2.y * dilation) - (ob1.y * dilation)
     pythag_dsq = x_distance**2 + y_distance**2
 
+    #Prevents division by 0 errors
     if pythag_dsq == 0:
         pythag_dsq = 1
 
+    #Gives the objects the force of gravity
     ob1.x_grav += g * (ob1.mass * ob2.mass) * x_distance / pythag_dsq
     ob1.y_grav += g * (ob1.mass * ob2.mass) * y_distance / pythag_dsq
 
+#Checks if any particles are off screen
 def screenCheck():
     global particle_list, particle_amount
     for i in range(0 , particle_amount):
+        #Prevent an index error
         if i < len(particle_list):
+            #Checks is particle is off any edge of the screen
             if (particle_list[i].x > width + 1 or particle_list[i].x < -1 or \
             particle_list[i].y > height + 1 or particle_list[i].y < -1):
                 del particle_list[i]
 
+#Applies the force of gravity on the particle
 def physicsApplication(i):
+    #Gravity to velocity
     particle_list[i].x_vel += particle_list[i].x_grav / particle_list[i].mass
     particle_list[i].y_vel += particle_list[i].y_grav / particle_list[i].mass
 
+    #velocity to position
     particle_list[i].x += particle_list[i].x_vel
     particle_list[i].y += particle_list[i].y_vel
 
+#Draws objects as points on the screen
 def drawParticle(i):
-    jmss.drawPixel(int(particle_list[i].x),int(particle_list[i].y),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
-    #jmss.drawPixel(int(particle_list[i].x) + 1,int(particle_list[i].y),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
-    #jmss.drawPixel(int(particle_list[i].x) - 1,int(particle_list[i].y),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
-    #jmss.drawPixel(int(particle_list[i].x),int(particle_list[i].y + 1),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
-    #jmss.drawPixel(int(particle_list[i].x),int(particle_list[i].y - 1),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
-
-@jmss.mainloop
-def Sim():
-    global particle_list, particle_amount, box1, width, height
     jmss.clear()
+    #draws the center pixel
+    jmss.drawPixel(int(particle_list[i].x),int(particle_list[i].y),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
+    #draws surrounding pixels, can be commented out
+    jmss.drawPixel(int(particle_list[i].x) + 1,int(particle_list[i].y),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
+    jmss.drawPixel(int(particle_list[i].x) - 1,int(particle_list[i].y),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
+    jmss.drawPixel(int(particle_list[i].x),int(particle_list[i].y + 1),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
+    jmss.drawPixel(int(particle_list[i].x),int(particle_list[i].y - 1),particle_list[i].r,particle_list[i].g,particle_list[i].b,1)
 
-    particleSpawn(width/2 - box1,width/2 + box1,height/2 - box1, height/2 + box1, particle_amount/2)
-    particleSpawn(100, width/2, 100, height/2, particle_amount/2)
-
+#Does everything regarding existing particles
+def particleManagment():
+    #for every pair of objects that isnt the same object twice
     for i in range(0 , len(particle_list)):
         for a in range(0 , len(particle_list)):
             if particle_list[i] != particle_list[a]:
+                #do gravity
                 Gravity_Calc(particle_list[i] , particle_list[a])
-
+        #apply physics to each particle
         physicsApplication(i)
-
+        #draw each particle
         drawParticle(i)
-
+    #resets each particles gravity to 0
     for i in range(0 , len(particle_list)):
         particle_list[i].x_grav = 0
         particle_list[i].y_grav = 0
 
+@jmss.mainloop
+#the sim itself
+def Sim():
+    #Spawns any missing particles
+    particleSpawn(50, particle_amount)
+    #Takes care of each particle
+    particleManagment()
+    #Deletes any particles that are off screen
     screenCheck()
 jmss.run()
