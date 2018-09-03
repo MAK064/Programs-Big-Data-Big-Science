@@ -11,9 +11,8 @@ fps = -1
 
 #particle system data
 particle_amount = int(input("Input how many objects (100-200 reccomended, 500+ possible):"))
-g = 2/(1*particle_amount)
-dilation = 80/1
-box1 = 250
+g = 4/(1*particle_amount)
+dilation = 300/1
 particle_list = []
 
 jmss = Graphics(width = width, height = height, title = "Gravity Sim" , fps = fps)
